@@ -1,0 +1,137 @@
+/* ===== note PAGE ONLY (SCOPED) ===== */
+
+.note-container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+    border-radius: 12px;
+    background: #ffffff;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+/* Title */
+.note-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* ===== FORM ===== */
+
+.note-container form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: flex-end;
+}
+
+/* Input groups */
+.note-container form div {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 250px;
+}
+
+/* Labels */
+.note-container label {
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #555;
+}
+
+/* Inputs */
+.note-container input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.note-container input:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* Button */
+.note-container button {
+    padding: 10px 20px;
+    background: #00c853;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    height: 42px;
+    transition: 0.3s;
+}
+
+.note-container button:hover {
+    background: #009624;
+}
+
+/* ===== TABLE ===== */
+
+.note-container table {
+    width: 100%;
+    margin-top: 25px;
+    border-collapse: collapse;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+/* Header */
+.note-container th {
+    background: #007bff;
+    color: white;
+    padding: 12px;
+    text-align: left;
+}
+
+/* Cells */
+.note-container td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+}
+
+/* Hover */
+.note-container tr:hover {
+    background: #f9f9f9;
+}
+
+/* Delete button */
+.note-container td button {
+    background: #e53935;
+    padding: 6px 10px;
+    font-size: 13px;
+}
+
+.note-container td button:hover {
+    background: #b71c1c;
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width: 600px) {
+
+    .note-container {
+        margin: 20px 10px;
+        padding: 15px;
+    }
+
+    .note-container form {
+        flex-direction: column;
+    }
+
+    .note-container button {
+        width: 100%;
+    }
+
+    .note-container table {
+        font-size: 13px;
+    }
+
+    .note-container th,
+    .note-container td {
+        padding: 8px;
+    }
+}

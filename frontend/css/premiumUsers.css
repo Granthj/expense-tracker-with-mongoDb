@@ -1,0 +1,61 @@
+
+.premium-container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+    border-radius: 12px;
+    background: #ffffff;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+/* Title */
+.premium-container h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.premium-container table {
+    width: 100%;
+    margin-top: 25px;
+    border-collapse: collapse;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+/* Header */
+.premium-container th {
+    background: #007bff;
+    color: white;
+    padding: 12px;
+    text-align: left;
+}
+
+/* Cells */
+.premium-container td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+}
+
+/* Hover */
+.premium-container tr:hover {
+    background: #f9f9f9;
+}
+
+
+@media (max-width: 600px) {
+
+    .premium-container {
+        margin: 20px 10px;
+        padding: 15px;
+    }
+
+    .premium-container table {
+        font-size: 13px;
+    }
+
+    .premium-container th,
+    .premium-container td {
+        padding: 8px;
+    }
+}
