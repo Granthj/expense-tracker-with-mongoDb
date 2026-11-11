@@ -27,7 +27,7 @@ const incomeSchema = new mongoose.Schema({
         required: true
     },
 
-    UserId: {
+    userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true

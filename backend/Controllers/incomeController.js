@@ -40,13 +40,13 @@ const postIncome = async (req, res) => {
 
             description: description,
 
-            date: localDate,
+            date: new Date(),
 
             month: monthName,
 
             year: currentYear,
 
-            UserId: req.userId
+            userId: req.userId
 
         });
 
@@ -81,7 +81,7 @@ const getIncome = async (req, res) => {
     try {
 
         const incomeData = await Income.find({
-            UserId: req.userId
+            userId: req.userId
         }).sort({
             year: -1,
             month: -1
@@ -112,7 +112,7 @@ const deleteIncome = async (req, res) => {
 
         const income = await Income.findOne({
             _id: id,
-            UserId: req.userId
+            userId: req.userId
         });
 
         if (!income) {

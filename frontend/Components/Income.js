@@ -92,7 +92,7 @@ export function Income(navigate) {
                 const token = localStorage.getItem("token");
 
                 await axios.delete(
-                  `${API_URL}/delete-income/${item.id}`,
+                  `${API_URL}/delete-income/${item._id}`,
                   {
                     headers: { Authorization: `Bearer ${token}` },
                   }

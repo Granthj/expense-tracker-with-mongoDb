@@ -31,8 +31,7 @@ const postExpense = async (req, res) => {
                 throw new Error('User not found');
             }
 
-            user.totalExpense =
-                Number(user.totalExpense) + Number(expenseAmount);
+            user.totalExpense = Number(user.totalExpense) + Number(expenseAmount);
 
             await user.save({ session });
 
@@ -43,16 +42,17 @@ const postExpense = async (req, res) => {
             );
 
             expense = await Expense.create([{
-                date: localDate,
+                // date: localDate,
+                date: new Date(),
                 expenseAmount: expenseAmount,
                 category: category,
                 description: description,
                 note: note,
-                UserId: userId
+                userId: userId
             }], { session });
 
         });
-
+        console.log('Expense created:', expense);
         res.status(201).json(expense);
 
     }
@@ -74,13 +74,12 @@ const getExpense = async (req, res) => {
     try {
 
         const limit = parseInt(req.query.limit) || 10;
-
         const page = parseInt(req.query.page) || 1;
 
         const offSet = (page - 1) * limit;
 
         const filter = {
-            UserId: req.userId
+            userId: req.userId
         };
 
         const [expenses, count] = await Promise.all([
@@ -97,11 +96,8 @@ const getExpense = async (req, res) => {
         res.status(200).json({
 
             expenses: expenses,
-
             totalItems: count,
-
             currentPage: page,
-
             totalPages: Math.ceil(count / limit)
 
         });
@@ -125,8 +121,6 @@ const deleteExpense = async (req, res) => {
 
         const { id } = req.params;
 
-        let deletedExpense;
-
         await session.withTransaction(async () => {
 
             const user = await User.findById(req.userId).session(session);
@@ -137,7 +131,7 @@ const deleteExpense = async (req, res) => {
 
             const expense = await Expense.findOne({
                 _id: id,
-                UserId: req.userId
+                userId: req.userId
             }).session(session);
 
             if (!expense) {
@@ -147,43 +141,27 @@ const deleteExpense = async (req, res) => {
             if (user.isPremium === true) {
 
                 user.totalExpense =
-                    Number(user.totalExpense) -
+                    (Number(user.totalExpense) || 0) -
                     Number(expense.expenseAmount);
 
-                if (user.totalExpense <= 0) {
+                if (user.totalExpense < 0) {
                     user.totalExpense = 0;
                 }
 
                 await user.save({ session });
-
             }
-
-            deletedExpense = await Expense.findByIdAndDelete(
-                id,
-                { session }
-            );
-
+            await Expense.deleteOne({_id: id,userId: req.userId}).session(session);
         });
 
-        res.status(200).json({
-            message: 'Delete is done'
-        });
+        res.status(200).json({message: 'Expense deleted successfully'});
 
-    }
-    catch (err) {
+    } catch (err) {
 
-        console.log(err);
+        console.log('Delete Expense Error:', err);
 
-        if (err.message === 'Expense not found') {
-            return res.status(404).json({
-                message: 'Expense not found'
-            });
-        }
+        res.status(500).json({message: err.message});
 
-        return res.status(500).send('Something wrong');
-
-    }
-    finally {
+    } finally {
         await session.endSession();
     }
 };

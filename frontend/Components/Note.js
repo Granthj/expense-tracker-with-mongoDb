@@ -79,7 +79,7 @@ export function Note(navigation) {
             deleteButton.addEventListener('click', async ()=>{
 
                 await axios.delete(
-                  `${API_URL}/delete-note/${note.id}`,
+                  `${API_URL}/delete-note/${note._id}`,
                   {
                     headers:{'Authorization': `Bearer ${localStorage.getItem('token')}`}
                   }

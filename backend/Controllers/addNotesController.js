@@ -12,8 +12,8 @@ const postNotes = async (req, res) => {
 
         const note = await Note.create({
             description: description,
-            date: localDate,
-            UserId: req.userId
+            date: new Date(),
+            userId: req.userId
         });
 
         if (!note) {
@@ -42,7 +42,7 @@ const getNotes = async (req, res) => {
     try {
 
         const notes = await Note.find({
-            UserId: req.userId
+            userId: req.userId
         }).sort({
             date: 1
         });
@@ -86,7 +86,7 @@ const deleteNote = async (req, res) => {
 
         const deleted = await Note.findOneAndDelete({
             _id: noteId,
-            UserId: req.userId
+            userId: req.userId
         });
 
         if (!deleted) {

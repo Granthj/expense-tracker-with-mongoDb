@@ -12,7 +12,7 @@ const noteSchema = new mongoose.Schema({
         default: Date.now
     },
 
-    UserId: {
+    userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true

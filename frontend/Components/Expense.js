@@ -173,7 +173,6 @@ export function Expense(navigate) {
     const category = selectedCategory.value;
 
     const token = localStorage.getItem("token");
-    console.log(note,'gh')
     await axios.post(`${API_URL}/expense`,
       { expenseAmount, description, category, note },
       {
@@ -198,7 +197,7 @@ export function Expense(navigate) {
     const res = await axios.get(`${API_URL}/expense?page=${page}&limit=${limit}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
-
+    console.log(res);
     expenseList.innerHTML = "";
     
     if(res.data.totalPages > 0 && page > res.data.totalPages){
@@ -269,9 +268,9 @@ export function Expense(navigate) {
 
       btn.addEventListener("click", async () => {
         const token = localStorage.getItem("token");
-
+        // console.log(item._id,'nigga');
         await axios.delete(
-          `${API_URL}/delete-expense/${item.id}`,
+          `${API_URL}/delete-expense/${item._id}`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }

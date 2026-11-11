@@ -41,7 +41,7 @@ const monthlyTable = async (req, res) => {
 
         const expense = await Expense.find(
             {
-                UserId: req.userId,
+                userId: req.userId,
                 date: {
                     $gte: startOfMonth,
                     $lt: startOfNextMonth
@@ -60,7 +60,7 @@ const monthlyTable = async (req, res) => {
         const expenseTotal = await Expense.aggregate([
             {
                 $match: {
-                    UserId: user._id,
+                    userId: user._id,
                     date: {
                         $gte: startOfMonth,
                         $lt: startOfNextMonth
@@ -110,7 +110,7 @@ const monthlyTable = async (req, res) => {
 
         const income = await Income.find(
             {
-                UserId: req.userId,
+                userId: req.userId,
                 month: monthName,
                 year: currentYear
             },
@@ -128,7 +128,7 @@ const monthlyTable = async (req, res) => {
         const incomeTotal = await Income.aggregate([
             {
                 $match: {
-                    UserId: user._id,
+                    userId: user._id,
                     month: monthName,
                     year: currentYear
                 }
@@ -309,7 +309,7 @@ const yearlyTable = async (req, res) => {
 
             {
                 $match: {
-                    UserId: user._id,
+                    userId: user._id,
                     date: {
                         $gte: startOfMonth,
                         $lt: startOfNextMonth
@@ -339,7 +339,7 @@ const yearlyTable = async (req, res) => {
 
             {
                 $match: {
-                    UserId: user._id,
+                    userId: user._id,
                     month: monthName,
                     year: currentYear
                 }
@@ -423,7 +423,7 @@ const notesTable = async (req, res) => {
 
         const notes = await Note.find({
 
-            UserId: req.userId,
+            userId: req.userId,
 
             date: {
                 $gte: startOfYear,
